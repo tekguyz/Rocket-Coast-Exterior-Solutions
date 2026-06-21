@@ -1,0 +1,50 @@
+@import "tailwindcss";
+
+@theme {
+  --color-cloud: oklch(0.99 0.004 240);
+  --color-sky-tint: oklch(0.96 0.018 242);
+  --color-navy: oklch(0.18 0.045 252);
+  --color-ignition-red: oklch(0.52 0.225 27);
+  --color-sky-blue: oklch(0.54 0.175 250);
+  --color-ink: oklch(0.27 0.015 255);
+
+  --font-sans: var(--font-sans), sans-serif;
+  --font-display: var(--font-display), sans-serif;
+
+  --animate-shimmer: shimmer 1.5s infinite;
+
+  @keyframes shimmer {
+    100% {
+      transform: translateX(150%);
+    }
+  }
+}
+
+@layer base {
+  body {
+    background-color: var(--color-cloud);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+/* Custom scroll bar styling for premium agency feeling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-cloud);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-sky-blue);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-ignition-red);
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}

@@ -1,0 +1,6 @@
+{
+  "name": "Rocket Coast Exterior Solutions",
+  "description": "Brevard County's premier exterior cleaning specialists offering house soft washing, driveway cleaning, paver sealing, and complete exterior solutions.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
