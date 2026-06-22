@@ -153,148 +153,138 @@ export default function EstimateForm() {
                     </p>
                   </div>
                 </div>
-
-                {status.type === 'success' && status.isMock && (
-                  <div className="p-4 rounded-xl bg-amber-50 border border-amber-200 text-amber-950 flex items-start gap-3">
-                    <Sparkles className="h-4 w-4 text-amber-600 shrink-0 mt-0.5 animate-pulse" />
-                    <div>
-                      <h5 className="text-xs font-bold uppercase tracking-[0.15em] font-display">System Lead Recorded</h5>
-                      <p className="text-xs font-sans mt-1.5 leading-relaxed text-amber-950/80">
-                        We validated layout specifications and saved this lead inside the system console. When you connect your <strong>RESEND_API_KEY</strong> credential in AI Studio, customer submissions will route instantly to <strong>{COMPANY_INFO.email}</strong>.
-                      </p>
-                    </div>
-                  </div>
-                )}
               </div>
             )}
 
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-3 sm:space-y-4">
-              
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-3 sm:gap-x-6 sm:gap-y-4">
-                <div className="flex flex-col">
-                  <label htmlFor="form-name" className="block text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-navy mb-1.5 sm:mb-2">
-                    Your Name
-                  </label>
-                  <Input 
-                    id="form-name"
-                    placeholder="Enter your full name" 
-                    error={!!errors.name}
-                    className="bg-sky-tint/30 border-sky-blue/15 text-navy focus-visible:ring-2 focus-visible:ring-sky-blue rounded-xl h-11 sm:h-12 shadow-inner placeholder:text-navy/30"
-                    {...register("name")}
-                  />
-                  <ErrorBlock error={errors.name?.message} />
+            {status?.type !== 'success' && (
+              <form onSubmit={handleSubmit(onSubmit)} className="space-y-3 sm:space-y-4">
+                
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-3 sm:gap-x-6 sm:gap-y-4">
+                  <div className="flex flex-col">
+                    <label htmlFor="form-name" className="block text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-navy mb-1.5 sm:mb-2">
+                      Your Name
+                    </label>
+                    <Input 
+                      id="form-name"
+                      placeholder="Enter your full name" 
+                      error={!!errors.name}
+                      className="bg-sky-tint/30 border-sky-blue/15 text-navy focus-visible:ring-2 focus-visible:ring-sky-blue rounded-xl h-11 sm:h-12 shadow-inner placeholder:text-navy/30"
+                      {...register("name")}
+                    />
+                    <ErrorBlock error={errors.name?.message} />
+                  </div>
+
+                  <div className="flex flex-col">
+                    <label htmlFor="form-address" className="block text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-navy mb-1.5 sm:mb-2">
+                      Service Address
+                    </label>
+                    <Input 
+                      id="form-address"
+                      placeholder="e.g. 104 Rocket Way, Cocoa, FL" 
+                      error={!!errors.address}
+                      className="bg-sky-tint/30 border-sky-blue/15 text-navy focus-visible:ring-2 focus-visible:ring-sky-blue rounded-xl h-11 sm:h-12 shadow-inner placeholder:text-navy/30"
+                      {...register("address")}
+                    />
+                    <ErrorBlock error={errors.address?.message} />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-3 sm:gap-x-6 sm:gap-y-4">
+                  <div className="flex flex-col">
+                    <label htmlFor="form-email" className="block text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-navy mb-1.5 sm:mb-2">
+                      Email Address
+                    </label>
+                    <Input 
+                      id="form-email"
+                      type="email"
+                      placeholder="yourname@domain.com" 
+                      error={!!errors.email}
+                      className="bg-sky-tint/30 border-sky-blue/15 text-navy focus-visible:ring-2 focus-visible:ring-sky-blue rounded-xl h-11 sm:h-12 shadow-inner placeholder:text-navy/30"
+                      {...register("email")}
+                    />
+                    <ErrorBlock error={errors.email?.message} />
+                  </div>
+
+                  <div className="flex flex-col">
+                    <label htmlFor="form-phone" className="block text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-navy mb-1.5 sm:mb-2">
+                      Phone Number
+                    </label>
+                    <Input 
+                      id="form-phone"
+                      type="tel"
+                      placeholder="(321) 693-9845" 
+                      error={!!errors.phone}
+                      className="bg-sky-tint/30 border-sky-blue/15 text-navy focus-visible:ring-2 focus-visible:ring-sky-blue rounded-xl h-11 sm:h-12 shadow-inner placeholder:text-navy/30"
+                      {...register("phone", {
+                        onChange: (e) => {
+                          const formatted = formatPhoneNumber(e.target.value);
+                          setValue("phone", formatted, { shouldValidate: true });
+                        }
+                      })}
+                    />
+                    <ErrorBlock error={errors.phone?.message} />
+                  </div>
                 </div>
 
                 <div className="flex flex-col">
-                  <label htmlFor="form-address" className="block text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-navy mb-1.5 sm:mb-2">
-                    Service Address
+                  <label htmlFor="form-service-select" className="block text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-navy mb-1.5 sm:mb-2">
+                    Requested Service Block
                   </label>
-                  <Input 
-                    id="form-address"
-                    placeholder="e.g. 104 Rocket Way, Cocoa, FL" 
-                    error={!!errors.address}
-                    className="bg-sky-tint/30 border-sky-blue/15 text-navy focus-visible:ring-2 focus-visible:ring-sky-blue rounded-xl h-11 sm:h-12 shadow-inner placeholder:text-navy/30"
-                    {...register("address")}
-                  />
-                  <ErrorBlock error={errors.address?.message} />
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-3 sm:gap-x-6 sm:gap-y-4">
-                <div className="flex flex-col">
-                  <label htmlFor="form-email" className="block text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-navy mb-1.5 sm:mb-2">
-                    Email Address
-                  </label>
-                  <Input 
-                    id="form-email"
-                    type="email"
-                    placeholder="yourname@domain.com" 
-                    error={!!errors.email}
-                    className="bg-sky-tint/30 border-sky-blue/15 text-navy focus-visible:ring-2 focus-visible:ring-sky-blue rounded-xl h-11 sm:h-12 shadow-inner placeholder:text-navy/30"
-                    {...register("email")}
-                  />
-                  <ErrorBlock error={errors.email?.message} />
+                  <Select
+                    id="form-service-select"
+                    error={!!errors.service}
+                    className="bg-sky-tint/30 border-sky-blue/15 text-navy focus-visible:ring-2 focus-visible:ring-sky-blue rounded-xl h-11 sm:h-12 shadow-inner"
+                    {...register("service")}
+                  >
+                    <option value="">-- Click to Select Your Service --</option>
+                    {SERVICES.map((s) => (
+                      <option key={s.id} value={s.id}>
+                        {s.title}
+                      </option>
+                    ))}
+                    <option value="multiple-services">Combined Multi-Service Solutions</option>
+                  </Select>
+                  <ErrorBlock error={errors.service?.message} />
                 </div>
 
                 <div className="flex flex-col">
-                  <label htmlFor="form-phone" className="block text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-navy mb-1.5 sm:mb-2">
-                    Phone Number
+                  <label htmlFor="form-message" className="block text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-navy mb-1.5 sm:mb-2">
+                    Special Notes & Property Details (Optional)
                   </label>
-                  <Input 
-                    id="form-phone"
-                    type="tel"
-                    placeholder="(321) 693-9845" 
-                    error={!!errors.phone}
-                    className="bg-sky-tint/30 border-sky-blue/15 text-navy focus-visible:ring-2 focus-visible:ring-sky-blue rounded-xl h-11 sm:h-12 shadow-inner placeholder:text-navy/30"
-                    {...register("phone", {
-                      onChange: (e) => {
-                        const formatted = formatPhoneNumber(e.target.value);
-                        setValue("phone", formatted, { shouldValidate: true });
-                      }
-                    })}
+                  <Textarea 
+                    id="form-message"
+                    placeholder="Tell us about special conditions, roof pitches, HOA deadlines, or paver sealing area details..." 
+                    error={!!errors.message}
+                    className="bg-sky-tint/30 border-sky-blue/15 text-navy focus-visible:ring-2 focus-visible:ring-sky-blue rounded-xl min-h-[100px] shadow-inner placeholder:text-navy/30 resize-none"
+                    {...register("message")}
                   />
-                  <ErrorBlock error={errors.phone?.message} />
+                  <ErrorBlock error={errors.message?.message} />
                 </div>
-              </div>
 
-              <div className="flex flex-col">
-                <label htmlFor="form-service-select" className="block text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-navy mb-1.5 sm:mb-2">
-                  Requested Service Block
-                </label>
-                <Select
-                  id="form-service-select"
-                  error={!!errors.service}
-                  className="bg-sky-tint/30 border-sky-blue/15 text-navy focus-visible:ring-2 focus-visible:ring-sky-blue rounded-xl h-11 sm:h-12 shadow-inner"
-                  {...register("service")}
-                >
-                  <option value="">-- Click to Select Your Service --</option>
-                  {SERVICES.map((s) => (
-                    <option key={s.id} value={s.id}>
-                      {s.title}
-                    </option>
-                  ))}
-                  <option value="multiple-services">Combined Multi-Service Solutions</option>
-                </Select>
-                <ErrorBlock error={errors.service?.message} />
-              </div>
+                <div className="pt-2 sm:pt-4">
+                  <Button 
+                    type="submit" 
+                    disabled={isSubmitting}
+                    className="relative w-full h-12 sm:h-14 bg-ignition-red text-white uppercase tracking-widest font-extrabold font-sans text-[13px] sm:text-sm rounded-xl transition-all hover:bg-ignition-red/95 shadow-lg hover:shadow-xl hover:-translate-y-0.5 overflow-hidden group cursor-pointer disabled:opacity-80 disabled:cursor-wait disabled:hover:translate-y-0 border-none outline-none focus-visible:ring-2 focus-visible:ring-sky-blue"
+                  >
+                    {isSubmitting ? (
+                      <div className="flex items-center justify-center gap-3 animate-in fade-in zoom-in duration-300">
+                        <Loader2 className="h-5 w-5 animate-spin" />
+                        <span>Transmitting...</span>
+                      </div>
+                    ) : (
+                      <div className="flex items-center justify-center gap-3">
+                        <span>Launch Request</span>
+                        <Send className="h-4.5 w-4.5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                      </div>
+                    )}
+                    {/* Sheen effect */}
+                    <div className="absolute inset-0 -translate-x-[150%] bg-gradient-to-r from-transparent via-white/20 to-transparent group-hover:animate-[shimmer_1.5s_infinite] pointer-events-none" />
+                  </Button>
+                </div>
 
-              <div className="flex flex-col">
-                <label htmlFor="form-message" className="block text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-navy mb-1.5 sm:mb-2">
-                  Special Notes & Property Details (Optional)
-                </label>
-                <Textarea 
-                  id="form-message"
-                  placeholder="Tell us about special conditions, roof pitches, HOA deadlines, or paver sealing area details..." 
-                  error={!!errors.message}
-                  className="bg-sky-tint/30 border-sky-blue/15 text-navy focus-visible:ring-2 focus-visible:ring-sky-blue rounded-xl min-h-[100px] shadow-inner placeholder:text-navy/30 resize-none"
-                  {...register("message")}
-                />
-                <ErrorBlock error={errors.message?.message} />
-              </div>
-
-              <div className="pt-2 sm:pt-4">
-                <Button 
-                  type="submit" 
-                  disabled={isSubmitting}
-                  className="relative w-full h-12 sm:h-14 bg-ignition-red text-white uppercase tracking-widest font-extrabold font-sans text-[13px] sm:text-sm rounded-xl transition-all hover:bg-ignition-red/95 shadow-lg hover:shadow-xl hover:-translate-y-0.5 overflow-hidden group cursor-pointer disabled:opacity-80 disabled:cursor-wait disabled:hover:translate-y-0 border-none outline-none focus-visible:ring-2 focus-visible:ring-sky-blue"
-                >
-                  {isSubmitting ? (
-                    <div className="flex items-center justify-center gap-3 animate-in fade-in zoom-in duration-300">
-                      <Loader2 className="h-5 w-5 animate-spin" />
-                      <span>Transmitting...</span>
-                    </div>
-                  ) : (
-                    <div className="flex items-center justify-center gap-3">
-                      <span>Launch Request</span>
-                      <Send className="h-4.5 w-4.5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                    </div>
-                  )}
-                  {/* Sheen effect */}
-                  <div className="absolute inset-0 -translate-x-[150%] bg-gradient-to-r from-transparent via-white/20 to-transparent group-hover:animate-[shimmer_1.5s_infinite] pointer-events-none" />
-                </Button>
-              </div>
-
-            </form>
+              </form>
+            )}
           </CardContent>
         </Card>
         

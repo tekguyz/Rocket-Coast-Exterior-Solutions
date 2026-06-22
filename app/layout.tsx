@@ -21,7 +21,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL('http://rocket-coast.vercel.app/'),
+  metadataBase: new URL('https://rocket-coast.vercel.app'),
   title: 'Rocket Coast Exterior Solutions | Premium Space Coast Pressure Washing',
   description: 'Professional residential and commercial soft washing, driveway cleaning, hard water stain removal, and paver sealing across Brevard County. Request a free estimate today.',
   robots: {
@@ -37,9 +37,8 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: '/favicon.ico' },
+      { url: '/icon0.svg', type: 'image/svg+xml' },
       { url: '/icon1.png', type: 'image/png' },
-      { url: '/icon0.svg', type: 'image/svg+xml' }
     ],
     apple: [
       { url: '/icon1.png' }
@@ -47,17 +46,32 @@ export const metadata: Metadata = {
   },
   manifest: '/manifest.json',
   openGraph: {
-    title: 'Rocket Coast Exterior Solutions',
+    title: 'Rocket Coast Exterior Solutions | Brevard County Pressure Washing',
     description: 'Professional residential and commercial soft washing, driveway cleaning, hard water stain removal, and paver sealing across Brevard County.',
     type: 'website',
     locale: 'en_US',
-    url: 'https://rocketcoastexteriorsolutions.com',
+    url: 'https://rocket-coast.vercel.app',
     siteName: 'Rocket Coast Exterior Solutions',
+    images: [
+      {
+        url: '/hero.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Rocket Coast Exterior Solutions - Launching Curb Appeal',
+      },
+      {
+        url: '/icon1.png',
+        width: 512,
+        height: 512,
+        alt: 'Rocket Coast Logo',
+      }
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Rocket Coast Exterior Solutions',
     description: 'Professional residential and commercial soft washing across Brevard County.',
+    images: ['/hero.jpg'],
   },
 };
 
