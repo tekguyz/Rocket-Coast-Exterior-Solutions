@@ -11,7 +11,7 @@ import { Select } from "@/components/ui/select"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 
-import { SERVICES } from "@/lib/constants"
+import { SERVICES, COMPANY_INFO } from "@/lib/constants"
 import { estimateSchema, EstimateInput } from "@/lib/schema"
 import { submitEstimate } from "@/app/actions/send-estimate"
 
@@ -160,7 +160,7 @@ export default function EstimateForm() {
                     <div>
                       <h5 className="text-xs font-bold uppercase tracking-[0.15em] font-display">System Lead Recorded</h5>
                       <p className="text-xs font-sans mt-1.5 leading-relaxed text-amber-950/80">
-                        We validated layout specifications and saved this lead inside the system console. When you connect your <strong>RESEND_API_KEY</strong> credential in AI Studio, customer submissions will route instantly to <strong>rocketcoastexteriorsolutions@gmail.com</strong>.
+                        We validated layout specifications and saved this lead inside the system console. When you connect your <strong>RESEND_API_KEY</strong> credential in AI Studio, customer submissions will route instantly to <strong>{COMPANY_INFO.email}</strong>.
                       </p>
                     </div>
                   </div>
