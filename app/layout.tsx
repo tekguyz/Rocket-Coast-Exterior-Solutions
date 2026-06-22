@@ -37,11 +37,10 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: '/icon0.svg', type: 'image/svg+xml' },
-      { url: '/icon1.png', type: 'image/png' },
+      { url: '/icon0.svg', type: 'image/svg+xml' }
     ],
     apple: [
-      { url: '/icon1.png' }
+      { url: '/icon0.svg' }
     ]
   },
   manifest: '/manifest.json',
@@ -58,12 +57,6 @@ export const metadata: Metadata = {
         width: 1200,
         height: 630,
         alt: 'Rocket Coast Exterior Solutions - Launching Curb Appeal',
-      },
-      {
-        url: '/icon1.png',
-        width: 512,
-        height: 512,
-        alt: 'Rocket Coast Logo',
       }
     ],
   },

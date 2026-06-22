@@ -3,16 +3,10 @@
   "short_name": "Rocket Coast",
   "icons": [
     {
-      "src": "/icon1.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "maskable"
-    },
-    {
       "src": "/icon0.svg",
-      "sizes": "any",
+      "sizes": "192x192 512x512",
       "type": "image/svg+xml",
-      "purpose": "any"
+      "purpose": "any maskable"
     }
   ],
   "theme_color": "#0B1F3D",

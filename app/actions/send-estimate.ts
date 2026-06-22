@@ -37,6 +37,17 @@ export async function submitEstimate(prevState: any, formData: FormData) {
   console.log("Service Address:", data.address);
   console.log("Chosen Service:", data.service);
   console.log("Client Message:", data.message || "None provided");
+
+  const files = formData.getAll('files') as unknown as File[];
+  const hasFiles = files && files.length > 0 && files[0] && files[0].name !== 'undefined';
+  if (hasFiles) {
+    console.log("Attached photos & documents:");
+    files.forEach((file: any) => {
+      if (file && file.name) {
+        console.log(` - File: ${file.name} (${Math.round(file.size / 1024)} KB, type: ${file.type})`);
+      }
+    });
+  }
   console.log("--------------------------------------");
 
   // Determine key status

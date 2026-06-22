@@ -1,20 +1,36 @@
 <svg viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .brand-stroke {
+      stroke: #0B1F3D;
+    }
+    .brand-fill {
+      fill: #0B1F3D;
+    }
+    @media (prefers-color-scheme: dark) {
+      .brand-stroke {
+        stroke: #38bdf8;
+      }
+      .brand-fill {
+        fill: #38bdf8;
+      }
+    }
+  </style>
   <!-- Outer Decorative Circular Brand Rings -->
-  <circle cx="64" cy="64" r="58" stroke="#0B1F3D" stroke-width="2.5" opacity="0.9" />
-  <circle cx="64" cy="64" r="52" stroke="#0B1F3D" stroke-width="1" stroke-dasharray="4 3" opacity="0.4" />
+  <circle cx="64" cy="64" r="58" stroke-width="2.5" class="brand-stroke" opacity="0.9" />
+  <circle cx="64" cy="64" r="52" stroke-width="1" stroke-dasharray="4 3" class="brand-stroke" opacity="0.4" />
   
   <!-- Background Space Coast Palm Tree Silhouette -->
-  <path d="M26,96 Q29,82 35,70" stroke="#0B1F3D" stroke-width="2" stroke-linecap="round" fill="none" />
-  <path d="M35,70 C30,65 21,65 16,68" stroke="#0B1F3D" stroke-width="1.5" stroke-linecap="round" fill="none" />
-  <path d="M35,70 C32,61 25,57 19,60" stroke="#0B1F3D" stroke-width="1.5" stroke-linecap="round" fill="none" />
-  <path d="M35,70 C40,62 46,64 48,68" stroke="#0B1F3D" stroke-width="1.5" stroke-linecap="round" fill="none" />
+  <path d="M26,96 Q29,82 35,70" stroke-width="2" stroke-linecap="round" fill="none" class="brand-stroke" />
+  <path d="M35,70 C30,65 21,65 16,68" stroke-width="1.5" stroke-linecap="round" fill="none" class="brand-stroke" />
+  <path d="M35,70 C32,61 25,57 19,60" stroke-width="1.5" stroke-linecap="round" fill="none" class="brand-stroke" />
+  <path d="M35,70 C40,62 46,64 48,68" stroke-width="1.5" stroke-linecap="round" fill="none" class="brand-stroke" />
   
   <!-- Foreground Residential House Structural Lines -->
-  <path d="M46,92 V74 H82 V92 Z" stroke="#0B1F3D" stroke-width="2.5" stroke-linejoin="round" fill="none" />
-  <path d="M40,76 L64,52 L88,76" stroke="#0B1F3D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none" />
-  <rect x="58" y="80" width="12" height="12" stroke="#0B1F3D" stroke-width="1.5" fill="none" />
-  <line x1="64" y1="80" x2="64" y2="92" stroke="#0B1F3D" stroke-width="1" />
-  <line x1="58" y1="86" x2="70" y2="86" stroke="#0B1F3D" stroke-width="1" />
+  <path d="M46,92 V74 H82 V92 Z" stroke-width="2.5" stroke-linejoin="round" fill="none" class="brand-stroke" />
+  <path d="M40,76 L64,52 L88,76" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none" class="brand-stroke" />
+  <rect x="58" y="80" width="12" height="12" stroke-width="1.5" fill="none" class="brand-stroke" />
+  <line x1="64" y1="80" x2="64" y2="92" stroke-width="1" class="brand-stroke" />
+  <line x1="58" y1="86" x2="70" y2="86" stroke-width="1" class="brand-stroke" />
 
   <!-- High-Pressure Fluid Water Spray Blast Waves -->
   <path d="M18,102 C38,102 54,88 60,66" stroke="#2E6FD1" stroke-width="2" stroke-linecap="round" fill="none" />
@@ -42,6 +58,6 @@
     <path d="M-3.5,-2.5 A3.5,3.5 0 0,1 1.5,-5" stroke="white" stroke-width="1" stroke-linecap="round" fill="none" />
     
     <!-- Thick Machined Engine Nozzle Connector -->
-    <rect x="-6" y="28" width="12" height="3.5" rx="1" fill="#0B1F3D" />
+    <rect x="-6" y="28" width="12" height="3.5" rx="1" fill="#0B1F3D" class="brand-fill" />
   </g>
 </svg>

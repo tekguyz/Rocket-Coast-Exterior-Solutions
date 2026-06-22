@@ -3,7 +3,7 @@
 import * as React from "react"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { Send, CheckCircle2, AlertCircle, Sparkles, Loader2 } from "lucide-react"
+import { Send, CheckCircle2, AlertCircle, Sparkles, Loader2, Paperclip, X } from "lucide-react"
 
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
@@ -31,6 +31,9 @@ const ErrorBlock = ({ error }: { error?: string }) => {
 export default function EstimateForm() {
   const [isSubmitting, setIsSubmitting] = React.useState(false);
   const [status, setStatus] = React.useState<{ type: 'success' | 'error'; message: string; isMock?: boolean } | null>(null);
+  const [selectedFiles, setSelectedFiles] = React.useState<File[]>([]);
+  const [showAttachments, setShowAttachments] = React.useState(false);
+  const fileInputRef = React.useRef<HTMLInputElement>(null);
 
   // Helper formatting (###) ###-####
   const formatPhoneNumber = (value: string) => {
@@ -39,6 +42,17 @@ export default function EstimateForm() {
     if (limited.length <= 3) return limited;
     if (limited.length <= 6) return `(${limited.slice(0, 3)}) ${limited.slice(3)}`;
     return `(${limited.slice(0, 3)}) ${limited.slice(3, 6)}-${limited.slice(6)}`;
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      const newFiles = Array.from(e.target.files);
+      setSelectedFiles((prev) => [...prev, ...newFiles]);
+    }
+  };
+
+  const removeFile = (index: number) => {
+    setSelectedFiles((prev) => prev.filter((_, i) => i !== index));
   };
 
   const {
@@ -72,6 +86,11 @@ export default function EstimateForm() {
       formData.append("service", data.service);
       formData.append("message", data.message || "");
 
+      // Append attached images to formData
+      selectedFiles.forEach((file) => {
+        formData.append("files", file);
+      });
+
       const result = await submitEstimate(null, formData);
 
       if (result.success) {
@@ -81,6 +100,8 @@ export default function EstimateForm() {
           isMock: !!result.mockMode
         });
         reset();
+        setSelectedFiles([]);
+        setShowAttachments(false);
       } else {
         setStatus({
           type: 'error',
@@ -114,7 +135,7 @@ export default function EstimateForm() {
           </h2>
           <div className="w-16 h-1.5 bg-ignition-red mx-auto mt-6 mb-6" />
           <p className="text-lg text-ink/75 font-sans leading-relaxed tracking-wide">
-            Ready to upgrade your property&apos;s exterior? Send us your details below. Our team reviews layout parameters via satellite mapping and deploys a rapid quote within 24 hours.
+            Ready to upgrade your property's exterior? Send us your details below. Our team reviews your home's layout online and sends over a rapid quote within 24 hours.
           </p>
         </div>
 
@@ -259,6 +280,82 @@ export default function EstimateForm() {
                     {...register("message")}
                   />
                   <ErrorBlock error={errors.message?.message} />
+                </div>
+
+                {/* Optional Collapsible Attachment Slot */}
+                <div className="flex flex-col bg-sky-tint/20 rounded-xl border border-sky-blue/10 p-3 sm:p-4">
+                  <button
+                    type="button"
+                    onClick={() => setShowAttachments(!showAttachments)}
+                    className="flex items-center justify-between w-full text-left font-sans text-xs font-bold uppercase tracking-wider text-navy hover:text-sky-blue transition-colors outline-none focus:text-sky-blue"
+                  >
+                    <span className="flex items-center gap-2">
+                      <Paperclip className="h-4 w-4 text-sky-blue shrink-0 animate-pulse" />
+                      Attach Property Photos (Optional)
+                    </span>
+                    <span className="text-[10px] sm:text-xs text-sky-blue font-bold px-2 py-0.5 rounded-md bg-sky-blue/10 hover:bg-sky-blue/20 transition-all">
+                      {showAttachments ? "Collapse" : "Add Photos"}
+                    </span>
+                  </button>
+
+                  {/* Attachment body that expands perfectly */}
+                  {showAttachments && (
+                    <div className="mt-3.5 pt-3.5 border-t border-sky-blue/10 space-y-3 animate-in fade-in duration-200">
+                      <p className="text-[11px] font-sans text-navy/70 leading-relaxed">
+                        Attach photos of your driveway, roof, or paver areas. This lets our team review your property immediately on satellite tools and issue a faster quote!
+                      </p>
+                      
+                      <div className="flex flex-wrap items-center gap-3">
+                        {/* Hidden native input */}
+                        <input
+                          type="file"
+                          ref={fileInputRef}
+                          multiple
+                          accept="image/*"
+                          onChange={handleFileChange}
+                          className="hidden"
+                        />
+                        <Button
+                          type="button"
+                          variant="outline"
+                          onClick={() => fileInputRef.current?.click()}
+                          className="h-9 px-4 border border-dashed border-sky-blue/30 bg-sky-tint/10 text-navy hover:bg-sky-tint/30 rounded-lg text-xs flex items-center gap-1.5 cursor-pointer font-sans font-bold"
+                        >
+                          <Paperclip className="h-3.5 w-3.5" />
+                          Choose Photos
+                        </Button>
+                        
+                        {selectedFiles.length > 0 && (
+                          <span className="text-[11px] font-mono text-emerald-600 font-semibold">
+                            ✓ {selectedFiles.length} photo(s) attached
+                          </span>
+                        )}
+                      </div>
+
+                      {/* Chips array representing loaded files */}
+                      {selectedFiles.length > 0 && (
+                        <div className="flex flex-wrap gap-1.5 pt-1">
+                          {selectedFiles.map((file, idx) => (
+                            <div 
+                              key={`${file.name}-${idx}`} 
+                              className="inline-flex items-center gap-1.5 px-2 py-1 bg-white border border-sky-blue/15 text-navy text-[11px] font-sans rounded-md shadow-sm"
+                            >
+                              <span className="truncate max-w-[120px] font-medium">{file.name}</span>
+                              <span className="text-[9px] text-navy/40">({Math.round(file.size / 1024)} KB)</span>
+                              <button
+                                type="button"
+                                onClick={() => removeFile(idx)}
+                                className="text-red-500 hover:text-red-700 font-semibold text-xs ml-1 bg-transparent border-none p-0 cursor-pointer"
+                                aria-label="Remove photo"
+                              >
+                                <X className="h-3.5 w-3.5" />
+                              </button>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  )}
                 </div>
 
                 <div className="pt-2 sm:pt-4">
