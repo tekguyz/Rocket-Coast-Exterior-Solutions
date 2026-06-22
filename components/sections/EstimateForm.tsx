@@ -17,15 +17,16 @@ import { submitEstimate } from "@/app/actions/send-estimate"
 
 import { Logo } from "@/components/ui/Logo"
 
-const ErrorBlock = ({ error }: { error?: string }) => (
-  <div className="h-5 mt-1 overflow-hidden">
-    {error && (
+const ErrorBlock = ({ error }: { error?: string }) => {
+  if (!error) return null;
+  return (
+    <div className="h-5 mt-1 overflow-hidden">
       <span className="block text-[11px] font-sans font-semibold tracking-wide text-red-500 animate-in slide-in-from-top-1 opacity-100">
         {error}
       </span>
-    )}
-  </div>
-);
+    </div>
+  );
+};
 
 export default function EstimateForm() {
   const [isSubmitting, setIsSubmitting] = React.useState(false);
@@ -178,7 +179,7 @@ export default function EstimateForm() {
                     id="form-name"
                     placeholder="Enter your full name" 
                     error={!!errors.name}
-                    className="bg-sky-tint/30 border-sky-blue/15 text-navy focus-visible:ring-2 focus-visible:ring-sky-blue rounded-xl h-13 shadow-inner placeholder:text-navy/30"
+                    className="bg-sky-tint/30 border-sky-blue/15 text-navy focus-visible:ring-2 focus-visible:ring-sky-blue rounded-xl h-11 sm:h-12 shadow-inner placeholder:text-navy/30"
                     {...register("name")}
                   />
                   <ErrorBlock error={errors.name?.message} />
@@ -192,7 +193,7 @@ export default function EstimateForm() {
                     id="form-address"
                     placeholder="e.g. 104 Rocket Way, Cocoa, FL" 
                     error={!!errors.address}
-                    className="bg-sky-tint/30 border-sky-blue/15 text-navy focus-visible:ring-2 focus-visible:ring-sky-blue rounded-xl h-13 shadow-inner placeholder:text-navy/30"
+                    className="bg-sky-tint/30 border-sky-blue/15 text-navy focus-visible:ring-2 focus-visible:ring-sky-blue rounded-xl h-11 sm:h-12 shadow-inner placeholder:text-navy/30"
                     {...register("address")}
                   />
                   <ErrorBlock error={errors.address?.message} />
@@ -209,7 +210,7 @@ export default function EstimateForm() {
                     type="email"
                     placeholder="yourname@domain.com" 
                     error={!!errors.email}
-                    className="bg-sky-tint/30 border-sky-blue/15 text-navy focus-visible:ring-2 focus-visible:ring-sky-blue rounded-xl h-13 shadow-inner placeholder:text-navy/30"
+                    className="bg-sky-tint/30 border-sky-blue/15 text-navy focus-visible:ring-2 focus-visible:ring-sky-blue rounded-xl h-11 sm:h-12 shadow-inner placeholder:text-navy/30"
                     {...register("email")}
                   />
                   <ErrorBlock error={errors.email?.message} />
@@ -224,7 +225,7 @@ export default function EstimateForm() {
                     type="tel"
                     placeholder="(321) 693-9845" 
                     error={!!errors.phone}
-                    className="bg-sky-tint/30 border-sky-blue/15 text-navy focus-visible:ring-2 focus-visible:ring-sky-blue rounded-xl h-13 shadow-inner placeholder:text-navy/30"
+                    className="bg-sky-tint/30 border-sky-blue/15 text-navy focus-visible:ring-2 focus-visible:ring-sky-blue rounded-xl h-11 sm:h-12 shadow-inner placeholder:text-navy/30"
                     {...register("phone", {
                       onChange: (e) => {
                         const formatted = formatPhoneNumber(e.target.value);
@@ -243,13 +244,13 @@ export default function EstimateForm() {
                 <Select
                   id="form-service-select"
                   error={!!errors.service}
-                  className="bg-sky-tint/30 border-sky-blue/15 text-navy focus-visible:ring-2 focus-visible:ring-sky-blue rounded-xl h-13 shadow-inner"
+                  className="bg-sky-tint/30 border-sky-blue/15 text-navy focus-visible:ring-2 focus-visible:ring-sky-blue rounded-xl h-11 sm:h-12 shadow-inner"
                   {...register("service")}
                 >
                   <option value="">-- Click to Select Your Service --</option>
                   {SERVICES.map((s) => (
                     <option key={s.id} value={s.id}>
-                      {s.title} ({s.badge})
+                      {s.title}
                     </option>
                   ))}
                   <option value="multiple-services">Combined Multi-Service Solutions</option>
@@ -259,7 +260,7 @@ export default function EstimateForm() {
 
               <div className="flex flex-col">
                 <label htmlFor="form-message" className="block text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-navy mb-1.5 sm:mb-2">
-                  Special Notes / Roof parameters (Optional)
+                  Special Notes & Property Details (Optional)
                 </label>
                 <Textarea 
                   id="form-message"

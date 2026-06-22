@@ -26,7 +26,7 @@ export default function Hero() {
   ];
 
   return (
-    <section className="relative bg-navy overflow-hidden py-16 sm:py-24 lg:py-32 border-b border-sky-blue/10">
+    <section className="relative bg-navy overflow-hidden py-16 sm:py-24 lg:py-0 lg:min-h-[calc(100vh-80px)] lg:flex lg:items-center border-b border-sky-blue/10">
       {/* Background radial soft light gradient */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] pointer-events-none rounded-full bg-sky-blue/5 blur-3xl" />
 
@@ -52,7 +52,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="font-display text-5xl sm:text-6xl md:text-7xl font-black text-white leading-none uppercase tracking-tight"
+              className="font-display text-5xl sm:text-6xl md:text-7xl xl:text-8xl font-black text-white leading-none xl:leading-[0.9] uppercase tracking-tight"
             >
               Launch Your <br className="hidden sm:inline" />
               <span className="text-ignition-red drop-shadow-sm">Curb Appeal</span>
@@ -63,7 +63,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="mt-4 sm:mt-6 text-base sm:text-xl text-cloud/85 font-sans leading-relaxed max-w-2xl"
+              className="mt-4 sm:mt-6 text-base sm:text-xl xl:text-2xl text-cloud/85 font-sans leading-relaxed max-w-2xl xl:max-w-3xl"
             >
               Brevard County&apos;s exterior cleaning experts — soft washing, driveways, pavers, and more, done right the first time. We remove YEARS of mildew and oxidation in hours.
             </motion.p>
@@ -116,7 +116,7 @@ export default function Hero() {
             transition={{ duration: 0.7, delay: 0.2 }}
             className="hidden md:flex lg:col-span-5 relative items-center justify-center h-full w-full"
           >
-            <div className="relative w-full max-w-lg aspect-square sm:aspect-video lg:aspect-square rounded-2xl border-2 border-sky-blue/20 shadow-2xl">
+            <div className="relative w-full max-w-lg lg:max-w-xl xl:max-w-2xl aspect-square sm:aspect-video lg:aspect-square rounded-2xl border-2 border-sky-blue/20 shadow-2xl">
               {/* Overlay shading representing deep rich navy styling */}
               <div className="absolute inset-0 rounded-2xl bg-gradient-to-tr from-navy/50 via-transparent to-sky-blue/10 z-10 pointer-events-none" />
               

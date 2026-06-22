@@ -43,10 +43,10 @@ export default function Footer() {
               <a 
                 href="#" 
                 onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-                className="mb-8 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-blue inline-block rounded-sm"
+                className="mb-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-blue inline-block rounded-sm"
                 aria-label="Rocket Coast Exterior Solutions Home"
               >
-                <Logo theme="dark" className="h-8 md:h-10 mb-6" />
+                <Logo theme="dark" className="h-8 md:h-10" />
               </a>
               <p className="text-sm font-sans text-cloud/80 leading-relaxed max-w-sm">
                 Brevard County&apos;s elite exterior cleaning agency. We combine advanced low-pressure soft wash gear with standard professional pressure sweepers to protect and reset surface qualities safely.
@@ -191,9 +191,6 @@ export default function Footer() {
             <p className="text-xs font-sans text-cloud/55">
               © {new Date().getFullYear()} {COMPANY_INFO.name}. All Rights Reserved.
             </p>
-            <p className="text-[10px] font-sans text-cloud/40 mt-1 max-w-lg leading-relaxed">
-              We operate exclusively as a team-centric crew. All pricing quotes, service schedules, structural treatments, and property guarantees are governed directly under corporate insurance and client agreements.
-            </p>
           </div>
 
           <button 
@@ -202,7 +199,7 @@ export default function Footer() {
             className="flex items-center gap-2 rounded-full border border-sky-blue/20 bg-sky-blue/5 hover:bg-sky-blue/15 hover:text-white px-4 py-2 text-xs font-semibold tracking-wider text-cloud transition-all cursor-pointer"
             aria-label="Back to top of home portal"
           >
-            <span>Back to Launch</span>
+            <span>Back to Top</span>
             <ArrowUpCircle className="h-4.5 w-4.5 text-sky-blue" />
           </button>
         </div>

@@ -12,8 +12,8 @@ export const COMPANY_INFO = {
   name: "Rocket Coast Exterior Solutions",
   phone: "(321) 693-9845",
   phoneUrl: "tel:3216939845",
-  email: "rocketcoastexteriorsolutions@gmail.com",
-  emailUrl: "mailto:rocketcoastexteriorsolutions@gmail.com",
+  email: "contact@tekguyz.com",
+  emailUrl: "mailto:contact@tekguyz.com",
   facebook: "https://www.facebook.com/share/1CvYFgpBXf/",
 };
 

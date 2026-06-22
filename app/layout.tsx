@@ -1,4 +1,4 @@
-import type {Metadata} from 'next';
+import type {Metadata, Viewport} from 'next';
 import { Inter, Oswald } from 'next/font/google';
 import './globals.css';
 
@@ -15,6 +15,10 @@ const oswald = Oswald({
   weight: ['400', '500', '600', '700'],
   display: 'swap',
 });
+
+export const viewport: Viewport = {
+  themeColor: '#0B1F3D',
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL('http://rocket-coast.vercel.app/'),
@@ -34,11 +38,11 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       { url: '/favicon.ico' },
-      { url: '/icon.png', type: 'image/png' },
-      { url: '/icon.svg', type: 'image/svg+xml' }
+      { url: '/icon1.png', type: 'image/png' },
+      { url: '/icon0.svg', type: 'image/svg+xml' }
     ],
     apple: [
-      { url: '/apple-icon.png' }
+      { url: '/icon1.png' }
     ]
   },
   manifest: '/manifest.json',
